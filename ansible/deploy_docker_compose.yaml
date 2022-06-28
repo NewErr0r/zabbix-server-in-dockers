@@ -1,0 +1,25 @@
+---
+- name: Deploy docker-compose.yaml
+  hosts: Debian
+  become: True
+
+  vars: 
+    path: /tmp
+    path_script: /home/dima/zabbix-docker-compose/ansible
+
+  tasks: 
+    - name: Copy docker-compose.yaml
+      copy:
+        src: docker-compose.yaml
+        dest: "{{ path }}"
+
+    - name: Run docker-compose
+      script: "{{ path_script }}/docker_compose_up.sh"
+
+    - name: Check docker ps
+      command: bash -c "docker ps"
+      register: output
+
+    - name: Show docker ps
+      debug: 
+        var: output
