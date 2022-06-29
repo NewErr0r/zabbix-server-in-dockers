@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /tmp
+cd /root
 docker-compose up -d

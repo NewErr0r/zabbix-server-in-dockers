@@ -4,13 +4,14 @@
   become: True
 
   vars: 
-    path: /tmp
-    path_script: /home/dima/zabbix-docker-compose/ansible
+    path: /root
+    path_script: /etc/ansible/zabbix-server-in-dockers/ansible
+    path_copy_docker_compose: /etc/ansible/zabbix-server-in-dockers
 
   tasks: 
     - name: Copy docker-compose.yaml
       copy:
-        src: docker-compose.yaml
+        src: "{{ path_copy_docker_compose }}/docker-compose.yaml"
         dest: "{{ path }}"
 
     - name: Run docker-compose
